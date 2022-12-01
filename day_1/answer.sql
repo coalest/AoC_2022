@@ -1,3 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS day01;
+
+SET search_path TO day01;
+
 DROP TABLE IF EXISTS inputs;
 
 CREATE TABLE inputs (
