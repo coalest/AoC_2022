@@ -1,10 +1,10 @@
-CREATE SCHEMA IF NOT EXISTS day01;
+begin;
 
-SET search_path TO day01;
+create schema if not exists day01;
 
-DROP TABLE IF EXISTS inputs;
+set search_path to day01;
 
-CREATE TABLE inputs (
+create table inputs (
     id SERIAL,
     input INTEGER
 );
@@ -12,48 +12,51 @@ CREATE TABLE inputs (
 \COPY inputs (input) FROM 'day_1/input.txt' WITH (FORMAT 'csv');
 
 -- Part 1
-WITH starts AS (
-    SELECT
+with starts as (
+    select
         id,
         input,
-        CASE WHEN input IS NULL THEN 1 ELSE 0 END AS island_start
-    FROM inputs
+        case when input is null then 1 else 0 end as island_start
+    from inputs
 ),
 
-islands AS (
-    SELECT
-        starts.input,
-        SUM(starts.island_start) OVER (ORDER BY starts.id ASC) AS island
-    FROM starts
+islands as (
+    select
+        input,
+        SUM(island_start) over (order by id asc) as island
+    from starts
 )
 
-SELECT SUM(COALESCE(islands.input, 0)) OVER (PARTITION BY islands.island) AS answer
-FROM islands
-ORDER BY answer DESC
-LIMIT 1;
+select
+    SUM(COALESCE(input, 0)) over (partition by island) as answer
+from islands
+order by answer desc
+limit 1;
 
 -- Part 2
-WITH starts AS (
-    SELECT
+with starts as (
+    select
         id,
         input,
-        CASE WHEN input IS NULL THEN 1 ELSE 0 END AS island_start
-    FROM inputs
+        case when input is null then 1 else 0 end as island_start
+    from inputs
 ),
 
-islands AS (
-    SELECT
+islands as (
+    select
         starts.input,
-        SUM(starts.island_start) OVER (ORDER BY starts.id ASC) AS island
-    FROM starts
+        SUM(island_start) over (order by id asc) as island
+    from starts
 )
 
-SELECT SUM(top_three.sum) AS answer
-FROM (SELECT DISTINCT
-    islands.island,
+select SUM(top_three.sum) as answer
+from (select distinct
+    island,
     SUM(
-        COALESCE(islands.input, 0)
-    ) OVER (PARTITION BY islands.island) AS sum
-    FROM islands
-    ORDER BY sum DESC
-    LIMIT 3) AS top_three;
+        COALESCE(input, 0)
+    ) over (partition by island) as sum
+    from islands
+    order by sum desc
+    limit 3) as top_three;
+
+rollback;
