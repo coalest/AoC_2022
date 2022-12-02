@@ -52,11 +52,7 @@ with outcomes as (
                     when you = 'Y' then 'X'
                     when you = 'Z' then 'Y'
                 end
-            when opponent = 'B' then
-                case when you = 'X' then 'X'
-                    when you = 'Y' then 'Y'
-                    when you = 'Z' then 'Z'
-                end
+            when opponent = 'B' then you
             when opponent = 'C' then
                 case when you = 'X' then 'Y'
                     when you = 'Y' then 'Z'
