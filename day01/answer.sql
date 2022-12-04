@@ -9,7 +9,7 @@ create table inputs (
     input INTEGER
 );
 
-\COPY inputs (input) FROM 'day_1/input.txt' WITH (FORMAT 'csv');
+\COPY inputs (input) FROM 'day01/input.txt' WITH (FORMAT 'csv');
 
 -- Part 1
 with starts as (

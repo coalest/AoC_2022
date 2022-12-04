@@ -10,7 +10,7 @@ create table raw (
     range_2 TEXT
 );
 
-\COPY raw (range_1, range_2) FROM 'day_4/input.txt' WITH (FORMAT 'csv');
+\COPY raw (range_1, range_2) FROM 'day04/input.txt' WITH (FORMAT 'csv');
 
 -- Part 1
 create table split_ranges as (

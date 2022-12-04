@@ -9,7 +9,7 @@ create table raw (
     rucksack TEXT
 );
 
-\COPY raw (rucksack) FROM 'day_3/input.txt' WITH (FORMAT 'csv');
+\COPY raw (rucksack) FROM 'day03/input.txt' WITH (FORMAT 'csv');
 
 -- Part 1
 with halves as (

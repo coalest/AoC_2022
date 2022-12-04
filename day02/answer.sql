@@ -10,7 +10,7 @@ create table raw (
     you TEXT
 );
 
-\COPY raw (opponent, you) FROM 'day_2/input.txt' WITH (FORMAT 'csv' ,DELIMITER ' ');
+\COPY raw (opponent, you) FROM 'day02/input.txt' WITH (FORMAT 'csv' ,DELIMITER ' ');
 
 -- Part 1
 with points as (
